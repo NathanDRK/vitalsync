@@ -1,0 +1,8 @@
+Extrait `backend/server.js` (après tentative de merge) :
+
+<<<<<<< HEAD
+    commit: "conflict-demo-a",
+=======
+    commit: "conflict-demo-b",
+>>>>>>> feature/conflict-demo-b
+
