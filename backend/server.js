@@ -6,7 +6,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     service: "vitalsync-api",
-    commit: "feature-add-endpoint",
+    commit: "conflict-demo-b",
     timestamp: new Date()
   });
 });
