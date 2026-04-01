@@ -21,7 +21,6 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: vitalsync/backend/package-lock.json
 
       - name: Install deps (backend)
         working-directory: vitalsync/backend
