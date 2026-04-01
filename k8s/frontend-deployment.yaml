@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vitalsync-frontend
+  labels:
+    app: vitalsync-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vitalsync-frontend
+  template:
+    metadata:
+      labels:
+        app: vitalsync-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/nathandrk/vitalsync-frontend:REPLACE_WITH_SHA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+

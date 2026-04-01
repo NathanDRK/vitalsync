@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vitalsync-backend
+  labels:
+    app: vitalsync-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vitalsync-backend
+  template:
+    metadata:
+      labels:
+        app: vitalsync-backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/nathandrk/vitalsync-backend:REPLACE_WITH_SHA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: DB_HOST
+              value: "vitalsync-database"
+            - name: DB_NAME
+              value: "vitalsync"
+            - name: DB_USER
+              value: "vitalsync"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: vitalsync-db-secret
+                  key: POSTGRES_PASSWORD
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+
